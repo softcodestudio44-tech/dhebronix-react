@@ -25,29 +25,39 @@ export const authenticateAdmin = verifyAdmin;
 export const loginAdmin = async (password) => {
   const adminPassword = process.env.ADMIN_PASSWORD;
   
+  console.log('DEBUG: Login attempt');
+  console.log('DEBUG: Input password length:', password?.length);
+  console.log('DEBUG: Stored password exists:', !!adminPassword);
+  console.log('DEBUG: Stored password length:', adminPassword?.length);
+  
   if (!adminPassword) {
     throw new Error('Admin password not configured');
   }
   
-  // Trim both passwords to remove any accidental whitespace
   const cleanInput = password.trim();
   const cleanStored = adminPassword.trim();
   
-  // Direct comparison (plain text password)
+  console.log('DEBUG: Input trimmed length:', cleanInput.length);
+  console.log('DEBUG: Stored trimmed length:', cleanStored.length);
+  console.log('DEBUG: Passwords match:', cleanInput === cleanStored);
+  
   if (cleanInput === cleanStored) {
+    console.log('DEBUG: Plain text match successful');
     return jwt.sign({ role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '24h' });
   }
   
-  // Fallback: try bcrypt comparison if password is hashed
+  console.log('DEBUG: Plain text match failed, trying bcrypt');
+  
   try {
     const isMatch = await bcryptjs.compare(cleanInput, cleanStored);
+    console.log('DEBUG: Bcrypt match result:', isMatch);
     if (isMatch) {
       return jwt.sign({ role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '24h' });
     }
   } catch (err) {
-    // bcrypt compare failed (stored password is not a hash)
-    console.log('Bcrypt comparison failed, password is plain text');
+    console.log('DEBUG: Bcrypt error:', err.message);
   }
   
+  console.log('DEBUG: All comparisons failed');
   throw new Error('Invalid password');
 };
