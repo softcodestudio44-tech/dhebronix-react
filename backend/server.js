@@ -22,12 +22,11 @@ const PORT = process.env.PORT || 10000;
 
 app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
 app.use(cors({
-  origin: process.env.FRONTEND_URL || '*',
+  origin: '*',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
-
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 1000,
