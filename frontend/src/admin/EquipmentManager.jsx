@@ -25,8 +25,7 @@ const EquipmentManager = () => {
   const [uploading, setUploading] = useState(false)
   const [submitting, setSubmitting] = useState(false)
 
-  const categories = ['speakers', 'mixers', 'microphones', 'amplifiers', 'lighting', 'accessories']
-
+  const categories = ['speakers', 'mixers', 'microphones', 'amplifiers', 'lighting', 'accessories', 'musical instruments']
   const resetForm = () => {
     setFormData({
       name: '',
