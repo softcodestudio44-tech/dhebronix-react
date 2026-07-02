@@ -1,6 +1,5 @@
 import { v2 as cloudinary } from 'cloudinary';
 import multer from 'multer';
-import { CloudinaryStorage } from 'multer-storage-cloudinary';
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -8,12 +7,12 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// Use memory storage instead of CloudinaryStorage
+// Use memory storage — we'll upload to Cloudinary manually
 const storage = multer.memoryStorage();
 
 export const upload = multer({ storage: storage });
 
-// Direct upload function
+// Direct upload function using Cloudinary's native API
 export const uploadToCloudinary = (fileBuffer, filename) => {
   return new Promise((resolve, reject) => {
     const stream = cloudinary.uploader.upload_stream(
