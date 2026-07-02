@@ -24,18 +24,30 @@ export const authenticateAdmin = verifyAdmin;
 
 export const loginAdmin = async (password) => {
   const adminPassword = process.env.ADMIN_PASSWORD;
+  
   if (!adminPassword) {
     throw new Error('Admin password not configured');
   }
   
-  if (password === adminPassword) {
+  // Trim both passwords to remove any accidental whitespace
+  const cleanInput = password.trim();
+  const cleanStored = adminPassword.trim();
+  
+  // Direct comparison (plain text password)
+  if (cleanInput === cleanStored) {
     return jwt.sign({ role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '24h' });
   }
   
-  const isMatch = await bcryptjs.compare(password, adminPassword);
-  if (!isMatch) {
-    throw new Error('Invalid password');
+  // Fallback: try bcrypt comparison if password is hashed
+  try {
+    const isMatch = await bcryptjs.compare(cleanInput, cleanStored);
+    if (isMatch) {
+      return jwt.sign({ role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '24h' });
+    }
+  } catch (err) {
+    // bcrypt compare failed (stored password is not a hash)
+    console.log('Bcrypt comparison failed, password is plain text');
   }
   
-  return jwt.sign({ role: 'admin' }, process.env.JWT_SECRET, { expiresIn: '24h' });
+  throw new Error('Invalid password');
 };
