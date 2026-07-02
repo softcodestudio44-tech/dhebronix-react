@@ -1,43 +1,48 @@
 import express from 'express';
-import { upload } from '../config/cloudinaryConfig.js';
+import { upload, uploadToCloudinary } from '../config/cloudinaryConfig.js';
 import { authenticateAdmin } from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.post('/image', authenticateAdmin, upload.single('image'), (req, res) => {
+router.post('/image', authenticateAdmin, upload.single('image'), async (req, res) => {
   try {
-    console.log('DEBUG: Single upload received');
-    console.log('DEBUG: File:', req.file);
-    
     if (!req.file) {
       return res.status(400).json({ error: 'No image uploaded' });
     }
+
+    const result = await uploadToCloudinary(req.file.buffer, req.file.originalname);
+    
     res.json({
       success: true,
-      url: req.file.path,
-      public_id: req.file.filename
+      url: result.secure_url,
+      public_id: result.public_id
     });
   } catch (error) {
-    console.error('DEBUG: Single upload error:', error);
+    console.error('Upload error:', error);
     res.status(500).json({ error: 'Upload failed', details: error.message });
   }
 });
 
-router.post('/multiple', authenticateAdmin, upload.array('images', 5), (req, res) => {
+router.post('/multiple', authenticateAdmin, upload.array('images', 5), async (req, res) => {
   try {
-    console.log('DEBUG: Multiple upload received');
-    console.log('DEBUG: Files:', req.files);
-    
     if (!req.files || req.files.length === 0) {
       return res.status(400).json({ error: 'No images uploaded' });
     }
-    const urls = req.files.map(file => ({
-      url: file.path,
-      public_id: file.filename
+
+    const uploadPromises = req.files.map(file => 
+      uploadToCloudinary(file.buffer, file.originalname)
+    );
+    
+    const results = await Promise.all(uploadPromises);
+    
+    const images = results.map(result => ({
+      url: result.secure_url,
+      public_id: result.public_id
     }));
-    res.json({ success: true, images: urls });
+
+    res.json({ success: true, images });
   } catch (error) {
-    console.error('DEBUG: Multiple upload error:', error);
+    console.error('Multiple upload error:', error);
     res.status(500).json({ error: 'Upload failed', details: error.message });
   }
 });
