@@ -13,7 +13,7 @@ import {
 } from 'lucide-react'
 
 const Dashboard = () => {
-  const { events, equipment, blogPosts, testimonials, team, refreshData } = useData()
+  const { events, equipment, blogPosts, testimonials, team } = useData()
   const [stats, setStats] = useState({
     totalEvents: 0,
     totalEquipment: 0,
@@ -23,9 +23,8 @@ const Dashboard = () => {
     totalMessages: 0
   })
 
-  useEffect(() => {
-    refreshData()
-  }, [refreshData])
+  // REMOVED: useEffect(() => { refreshData() }, [refreshData])
+  // This was causing infinite re-renders. Data is already loaded by DataContext.
 
   useEffect(() => {
     setStats({

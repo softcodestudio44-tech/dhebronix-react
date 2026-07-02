@@ -22,12 +22,17 @@ const AdminLayout = ({ children }) => {
   const location = useLocation()
   const navigate = useNavigate()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [hasChecked, setHasChecked] = useState(false)
 
   useEffect(() => {
-    if (!isAdmin) {
-      navigate('/admin', { replace: true })
+    // Only redirect after we've checked auth (isAdmin is not null)
+    if (!hasChecked && isAdmin !== null) {
+      setHasChecked(true)
+      if (!isAdmin) {
+        navigate('/admin', { replace: true })
+      }
     }
-  }, [isAdmin, navigate])
+  }, [isAdmin, hasChecked, navigate])
 
   const handleLogout = () => {
     logout()
