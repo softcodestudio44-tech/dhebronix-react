@@ -2,41 +2,49 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://dhebronixmc.top/</loc>
+    <lastmod>2026-07-03</lastmod>
     <priority>1.0</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://dhebronixmc.top/about</loc>
+    <lastmod>2026-07-03</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://dhebronixmc.top/events</loc>
+    <lastmod>2026-07-03</lastmod>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://dhebronixmc.top/equipment</loc>
+    <lastmod>2026-07-03</lastmod>
     <priority>0.9</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://dhebronixmc.top/blog</loc>
+    <lastmod>2026-07-03</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
     <loc>https://dhebronixmc.top/contact</loc>
+    <lastmod>2026-07-03</lastmod>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
   </url>
   <url>
     <loc>https://dhebronixmc.top/privacy-policy</loc>
+    <lastmod>2026-07-03</lastmod>
     <priority>0.3</priority>
     <changefreq>yearly</changefreq>
   </url>
   <url>
     <loc>https://dhebronixmc.top/terms-of-service</loc>
+    <lastmod>2026-07-03</lastmod>
     <priority>0.3</priority>
     <changefreq>yearly</changefreq>
   </url>
