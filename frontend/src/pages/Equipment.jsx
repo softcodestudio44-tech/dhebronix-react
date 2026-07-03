@@ -19,7 +19,7 @@ const Equipment = () => {
     { value: 'amplifiers', label: 'Amplifiers' },
     { value: 'lighting', label: 'Lighting' },
     { value: 'accessories', label: 'Accessories' },
-    { value: 'Musical instruments', label: 'Musical instruments' },
+    { value: 'musical instruments', label: 'Musical Instruments' },
   ]
 
   const filteredEquipment = activeFilter === 'all' 
