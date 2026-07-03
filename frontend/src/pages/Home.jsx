@@ -220,7 +220,7 @@ const Home = () => {
             style={{ transform: 'translateZ(40px)' }}
           >
             Elevating Your <br className="hidden sm:block" />
-            <span className="text-gradient">Audio Experience</span>
+            <span className="text-gradient">Visual and Audio Experience</span>
           </motion.h1>
 
           <motion.p
@@ -231,10 +231,10 @@ const Home = () => {
             style={{ transform: 'translateZ(25px)' }}
           >
             Professional sound engineering and multimedia solutions for events of all sizes. 
-            From live concerts to studio recordings, we deliver crystal-clear audio excellence.
+            From live concerts to studio recordings, we deliver crystal-clear visual and audio excellence.
           </motion.p>
 
-          <motion.div
+          <motion.div 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
