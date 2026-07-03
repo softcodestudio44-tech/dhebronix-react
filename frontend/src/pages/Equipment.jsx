@@ -35,13 +35,13 @@ const Equipment = () => {
         breadcrumbs={[{ label: 'Home', link: '/' }, { label: 'Equipment' }]} 
       />
 
-      <section className="section-padding bg-dark">
-        <div className="container-custom">
+      <section className="py-12 sm:py-20 px-4 bg-dark">
+        <div className="max-w-7xl mx-auto">
           <ScrollReveal>
-            <div className="text-center mb-10">
-              <span className="text-primary-light text-sm font-medium tracking-wider uppercase">Shop</span>
-              <h2 className="font-orbitron text-3xl md:text-4xl font-bold text-white mt-2 mb-4">Premium Equipment</h2>
-              <p className="text-gray-400 max-w-2xl mx-auto">
+            <div className="text-center mb-8 sm:mb-10">
+              <span className="text-primary-light text-xs sm:text-sm font-medium tracking-wider uppercase">Shop</span>
+              <h2 className="font-orbitron text-2xl sm:text-3xl md:text-4xl font-bold text-white mt-2 mb-3 sm:mb-4">Premium Equipment</h2>
+              <p className="text-gray-400 text-sm sm:text-base max-w-2xl mx-auto px-2">
                 Quality audio equipment for sale. All items are tested and come with warranty. 
                 Contact us via WhatsApp to purchase.
               </p>
@@ -57,13 +57,13 @@ const Equipment = () => {
           </ScrollReveal>
 
           {loading ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {[...Array(8)].map((_, i) => (
-                <div key={i} className="bg-dark-card border border-dark-border rounded-xl h-96 animate-pulse" />
+                <div key={i} className="bg-dark-card border border-dark-border rounded-xl h-80 animate-pulse" />
               ))}
             </div>
           ) : filteredEquipment.length > 0 ? (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
               {filteredEquipment.map((product, i) => (
                 <ScrollReveal key={product.id} delay={i * 100}>
                   <ProductCard product={product} onClick={() => setSelectedProduct(product)} />
