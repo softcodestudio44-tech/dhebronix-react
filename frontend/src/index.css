@@ -108,15 +108,15 @@
   .animate-delay-500 {
     animation-delay: 500ms;
   }
-    .scrollbar-hide {
+  
+  .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
-}
-
+  
   /* 3D Utilities */
   .perspective-1000 {
     perspective: 1000px;
