@@ -87,15 +87,15 @@ const Home = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/75 to-primary/25" />
         </div>
 
-        {/* 3D Sound Wave Ring - desktop only */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none hidden lg:flex">
-          <div className="relative w-[500px] h-[500px] xl:w-[600px] xl:h-[600px] preserve-3d animate-spin-slow">
+        {/* 3D Sound Wave Ring - ALL screens */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="relative w-[280px] h-[280px] sm:w-[400px] sm:h-[400px] md:w-[500px] md:h-[500px] xl:w-[600px] xl:h-[600px] preserve-3d animate-spin-slow">
             {[...Array(6)].map((_, i) => (
               <motion.div
                 key={i}
                 className="absolute inset-0 rounded-full border-2 border-primary/20"
                 style={{
-                  transform: `rotateX(${i * 30}deg) rotateY(${i * 45}deg) translateZ(${i * 30}px)`,
+                  transform: `rotateX(${i * 30}deg) rotateY(${i * 45}deg) translateZ(${i * 20}px)`,
                 }}
                 animate={{
                   scale: [1, 1.08, 1],
@@ -109,18 +109,18 @@ const Home = () => {
               />
             ))}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-24 h-24 xl:w-32 xl:h-32 rounded-full bg-primary/15 blur-2xl animate-pulse" />
+              <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 xl:w-32 xl:h-32 rounded-full bg-primary/15 blur-2xl animate-pulse" />
             </div>
           </div>
         </div>
 
-        {/* Floating 3D Cards - desktop only */}
-        <div className="absolute inset-0 pointer-events-none hidden xl:block">
+        {/* Floating 3D Cards - ALL screens, smaller on mobile */}
+        <div className="absolute inset-0 pointer-events-none">
           {[
-            { icon: Volume2, label: 'Live Sound', delay: 0, x: -220, y: -140 },
-            { icon: Mic, label: 'Recording', delay: 0.8, x: 220, y: -100 },
-            { icon: Speaker, label: 'Equipment', delay: 1.6, x: -180, y: 140 },
-            { icon: Radio, label: 'Broadcast', delay: 2.4, x: 180, y: 120 },
+            { icon: Volume2, label: 'Live Sound', delay: 0, x: -110, y: -100, smX: -160, smY: -120, mdX: -220, mdY: -140 },
+            { icon: Mic, label: 'Recording', delay: 0.8, x: 110, y: -80, smX: 160, smY: -100, mdX: 220, mdY: -100 },
+            { icon: Speaker, label: 'Equipment', delay: 1.6, x: -90, y: 100, smX: -140, smY: 120, mdX: -180, mdY: 140 },
+            { icon: Radio, label: 'Broadcast', delay: 2.4, x: 90, y: 80, smX: 140, smY: 100, mdX: 180, mdY: 120 },
           ].map((card, i) => (
             <motion.div
               key={i}
@@ -132,28 +132,28 @@ const Home = () => {
                 rotateY,
               }}
               initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 0.8, scale: 1 }}
+              animate={{ opacity: 0.7, scale: 1 }}
               transition={{ delay: card.delay + 0.5, duration: 0.6 }}
             >
               <motion.div
-                className="w-20 h-20 xl:w-24 xl:h-24 bg-dark-card/70 backdrop-blur-md border border-primary/25 rounded-xl flex flex-col items-center justify-center gap-1 cursor-pointer group hover:border-primary-light/60 transition-colors"
+                className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 xl:w-24 xl:h-24 bg-dark-card/70 backdrop-blur-md border border-primary/25 rounded-xl flex flex-col items-center justify-center gap-0.5 cursor-pointer group hover:border-primary-light/60 transition-colors"
                 whileHover={{ scale: 1.1, rotateY: 10 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               >
-                <card.icon size={20} className="text-primary-light group-hover:text-white" />
-                <span className="text-[8px] text-gray-400 font-medium uppercase tracking-wider">{card.label}</span>
+                <card.icon size={14} className="sm:w-4 sm:h-4 md:w-5 md:h-5 text-primary-light group-hover:text-white" />
+                <span className="text-[6px] sm:text-[7px] md:text-[8px] text-gray-400 font-medium uppercase tracking-wider">{card.label}</span>
               </motion.div>
             </motion.div>
           ))}
         </div>
 
-        {/* Particle Sound Bars - desktop only */}
-        <div className="absolute bottom-0 left-0 right-0 h-48 md:h-64 pointer-events-none overflow-hidden hidden md:block">
-          <div className="flex items-end justify-center gap-1 h-full">
+        {/* Particle Sound Bars - ALL screens */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 sm:h-40 md:h-48 lg:h-64 pointer-events-none overflow-hidden">
+          <div className="flex items-end justify-center gap-0.5 sm:gap-1 h-full">
             {[...Array(30)].map((_, i) => (
               <motion.div
                 key={i}
-                className="w-1.5 md:w-2 bg-gradient-to-t from-primary/50 to-primary-light/15 rounded-t-sm"
+                className="w-1 sm:w-1.5 md:w-2 bg-gradient-to-t from-primary/50 to-primary-light/15 rounded-t-sm"
                 animate={{
                   height: ['10%', '25%', '55%', '15%', '40%', '10%'],
                 }}
@@ -168,19 +168,19 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Floating Particles - desktop only */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block">
-          {[...Array(20)].map((_, i) => (
+        {/* Floating Particles - ALL screens */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {[...Array(15)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-1 h-1 bg-primary-light rounded-full"
+              className="absolute w-0.5 h-0.5 sm:w-1 sm:h-1 bg-primary-light rounded-full"
               style={{
                 left: `${Math.random() * 100}%`,
                 top: `${Math.random() * 100}%`,
               }}
               animate={{
-                y: [0, -Math.random() * 150 - 50],
-                opacity: [0, 0.7, 0],
+                y: [0, -Math.random() * 100 - 30],
+                opacity: [0, 0.6, 0],
                 scale: [0, 1, 0],
               }}
               transition={{
