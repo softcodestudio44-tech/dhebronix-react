@@ -7,11 +7,12 @@ const EquipmentModal = ({ isOpen, onClose, product }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose} maxWidth="max-w-3xl">
       <div className="grid md:grid-cols-2 gap-0">
-        <div className="relative h-64 md:h-auto">
+        {/* Image container — fixed height on all screen sizes */}
+        <div className="relative h-64 md:h-80 lg:h-96 bg-dark">
           <img 
             src={product.images?.[0] || 'https://images.unsplash.com/photo-1545454675-3531b543be5d?w=800'} 
             alt={product.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
           {product.condition && (
             <span className={`absolute top-4 left-4 px-3 py-1 text-xs font-bold rounded-full ${product.condition === 'new' ? 'bg-green-500 text-white' : 'bg-yellow-500 text-black'}`}>
